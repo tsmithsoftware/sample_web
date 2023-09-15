@@ -9,3 +9,20 @@ services:
       POSTGRES_USER: username # The PostgreSQL user (useful to connect to the database)
       POSTGRES_PASSWORD: password # The PostgreSQL password (useful to connect to the database)
       POSTGRES_DB: default_database # The PostgreSQL default database (automatically created at first launch)
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-d", "db"]
+      interval: 30s
+      timeout: 60s
+      retries: 5
+      start_period: 80s  
+
+  liquibase:
+    image: liquibase/liquibase:4.23
+    container_name: liquibase
+    depends_on:
+      database:
+        condition: service_healthy
+    # Volume to add the liquibase collection of scripts
+    volumes:
+      - ./sql/liquibase/changelog/:/liquibase/changelog/
+    command: --defaults-file=/liquibase/changelog/liquibase.properties update
