@@ -6,11 +6,11 @@ services:
     ports:
       - 5432:5432
     environment:
-      POSTGRES_USER: username # The PostgreSQL user (useful to connect to the database)
-      POSTGRES_PASSWORD: password # The PostgreSQL password (useful to connect to the database)
-      POSTGRES_DB: default_database # The PostgreSQL default database (automatically created at first launch)
+      POSTGRES_USER: username 
+      POSTGRES_PASSWORD: password 
+      POSTGRES_DB: postgres 
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready", "-d", "db"]
+      test: [ "CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}" ]
       interval: 30s
       timeout: 60s
       retries: 5
@@ -22,7 +22,6 @@ services:
     depends_on:
       database:
         condition: service_healthy
-    # Volume to add the liquibase collection of scripts
     volumes:
-      - ./sql/liquibase/changelog/:/liquibase/changelog/
-    command: --defaults-file=/liquibase/changelog/liquibase.properties update
+      - ./sql/liquibase/changelog/:/liquibase/changelog
+    command: update --changelog-file=changelog-1.sql --url=jdbc:postgresql://database:5432/postgres --username=username --password=password
