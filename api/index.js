@@ -3,8 +3,18 @@ module.exports.handler = async (event) => {
     statusCode: 200,
     body: JSON.stringify(
       {
-        message: "Go Serverless v3.0! Your function executed successfully!",
-        input: event,
+        schedules: [
+          {
+            events: [
+              {
+                utcDateTimeStart: "2023-09-15T14:44:57.807Z",
+                utcDateTimeEnd: "2023-09-15T15:44:57.807Z",
+                description: "A Schedule",
+                trainer: "Bob Shildorf"
+              }
+            ]
+          }
+        ]
       },
       null,
       2

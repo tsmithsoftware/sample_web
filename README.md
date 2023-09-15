@@ -1,11 +1,9 @@
 # "Pod Work" Project
 
 ## Overview
-I need to record a video of the "work I've done for the pod".
-
 This project will [create a basic React calendar](https://medium.com/@moodydev/create-a-custom-calendar-in-react-3df1bfd0b728) and [use webpack to bundle it into a C# .NET application](https://dev.to/milenamonteiro/how-to-easily-load-react-apps-into-an-aspnet-project-using-webpack-728).
 
-I'm just going to code a quick calendar talking to an API with a UI test set up and put it forward as a "POC".
+This project displays a React calendar talking to an API with a UI test set up.
 
 ### Techology
 * React
@@ -24,6 +22,8 @@ API runs on localhost:4002 using
 `npx serverless offline` 
 This runs the server on port 4002, check using curl or Postman:
 `curl localhost:4002`
+
+The PGAdmin container allows inspection of the database by navigating to localhost:8090. The database can be connected to using the docker network gateway address, which can be found using `docker network inspect bridge`, and the username and password specified in the docker-compose setup.
 
 Dotnet-calendar project runs on localhost:3000 (which will use the React project) using 
 

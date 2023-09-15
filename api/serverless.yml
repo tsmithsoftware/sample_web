@@ -10,7 +10,7 @@ functions:
     handler: index.handler
     events:
       - httpApi:
-          path: /
+          path: /schedules
           method: get
 
 plugins:
