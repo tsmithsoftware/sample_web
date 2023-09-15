@@ -11,6 +11,13 @@ I'm just going to code a quick calendar talking to an API with a UI test set up 
 * React
 * Webpack
 
+The database can be spun up and associated Liquibase changelogs applied by using:
+
+`cd ./database`
+`docker-compose up`
+
+The Liquibase container exits after applying the changelogs.
+
 API runs on localhost:4002 using 
 
 `cd ./api`
@@ -23,9 +30,9 @@ Dotnet-calendar project runs on localhost:3000 (which will use the React project
 `cd ./dotnet-calendar`
 `npm start`
 
-The React calendar project can be run on localhost:3005 using:
+The React calendar project has been moved to the dotnet-calendar project, and can be run on localhost:3005 using:
 
-`cd ./react-calendar`
+`cd ./dotnet-calentdar/ClientApp`
 `npm start`
 
 UI testing framework runs using:
