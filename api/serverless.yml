@@ -6,11 +6,26 @@ provider:
   runtime: nodejs18.x
 
 functions:
-  api:
-    handler: index.handler
+  getUsers:
+    handler: users.handler
+    timeout: 60
+    events:
+      - httpApi:
+          path: /users
+          method: get
+  getSchedules:
+    handler: schedules.handler
+    timeout: 60
     events:
       - httpApi:
           path: /schedules
+          method: get
+  getEvents:
+    handler: events.handler
+    timeout: 60
+    events:
+      - httpApi:
+          path: /events
           method: get
 
 plugins:

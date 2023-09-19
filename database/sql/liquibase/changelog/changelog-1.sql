@@ -2,30 +2,34 @@
         
 --changeset tsmith:1
 
-create table users (
+create table Users (
     id bigint generated always as identity primary key,
     firstName varchar(255),
     lastName varchar(255)
 );
 
-create table schedules (  
+create table Schedules (  
     id bigint generated always as identity primary key,
     scheduleName varchar(255),
     userId int
 );
 
-ALTER TABLE schedules ADD CONSTRAINT fk_schedule_user FOREIGN KEY (id) REFERENCES users(id) ON UPDATE RESTRICT ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE Schedules ADD CONSTRAINT fk_schedule_user FOREIGN KEY (userId) REFERENCES Users(id) ON UPDATE RESTRICT ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
 
-create table events (  
+create table Events (  
     id bigint generated always as identity primary key,
     eventName varchar(255),
-    scheduleId int
+    scheduleId int,
+    startTime timestamp,
+    endTime timestamp
 );
 
-ALTER TABLE events ADD CONSTRAINT fk_event_schedule FOREIGN KEY (id) REFERENCES schedules(id) ON UPDATE RESTRICT ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE Events ADD CONSTRAINT fk_event_schedule FOREIGN KEY (scheduleId) REFERENCES schedules(id) ON UPDATE RESTRICT ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
 
-insert into users (firstName, lastName) values ('tom', 'jones');
+insert into Users (firstName, lastName) values ('tom', 'jones');
 
-insert into schedules(scheduleName, userId) values ('schedule1', 1);
+insert into Schedules(scheduleName, userId) values ('schedule1', 1);
 
-insert into events(eventName, scheduleId) values ('event1', 1);
+insert into Events(eventName, scheduleId, startTime, endTime) values ('event1', 1, '2023-09-18 12:00:00', '2023-09-18 13:00:00');
+
+insert into Events(eventName, scheduleId, startTime, endTime) values ('event2', 1, '2023-09-18 14:00:00', '2023-09-18 15:00:00');

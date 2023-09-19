@@ -34,5 +34,5 @@ services:
       database:
         condition: service_healthy
     volumes:
-      - ./sql/liquibase/changelog/:/liquibase/changelog
+      - ./database/sql/liquibase/changelog/:/liquibase/changelog
     command: update --changelog-file=changelog-1.sql --url=jdbc:postgresql://database:5432/postgres --username=username --password=password
