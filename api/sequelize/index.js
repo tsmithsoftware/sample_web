@@ -9,7 +9,7 @@ const { applyExtraSetup } = require("./assoc")
  * the connection parameters separately to the Sequelize constructor.
  */
 const sequelize = new Sequelize("postgres", "username", "password", {
-    host: "127.0.0.1",
+    host: "database",
     dialect: "postgresql",
     port: 5432,
     pool: {

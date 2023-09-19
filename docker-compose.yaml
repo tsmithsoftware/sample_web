@@ -2,16 +2,6 @@ version: '3'
 
 services:
 
-  pgadmin:
-    container_name: pgadmin4_container
-    image: dpage/pgadmin4
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: root
-    ports:
-      - "8090:80"
-
   database:
     image: 'postgres:latest'
     ports:
@@ -25,7 +15,7 @@ services:
       interval: 30s
       timeout: 60s
       retries: 5
-      start_period: 80s  
+      start_period: 80s 
 
   liquibase:
     image: liquibase/liquibase:4.23
@@ -36,3 +26,26 @@ services:
     volumes:
       - ./database/sql/liquibase/changelog/:/liquibase/changelog
     command: update --changelog-file=changelog-1.sql --url=jdbc:postgresql://database:5432/postgres --username=username --password=password
+
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "8090:80"
+    depends_on:
+      database:
+        condition: service_healthy 
+
+  api:
+    container_name: api
+    ports:
+      - 4002:4002
+    build: ./api/.
+    depends_on:
+      database:
+        condition: service_healthy
+
