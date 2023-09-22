@@ -1,5 +1,5 @@
 import React from "react";
-import { format, addDays, startOfMonth, endOfMonth, startOfWeek, endOfWeek, isSameMonth, isSameDay, subMonths, parse, addMonths} from "date-fns";
+import { format, addDays, startOfMonth, endOfMonth, startOfWeek, endOfWeek, isSameMonth, isSameDay, subMonths, addMonths} from "date-fns";
 
 class Calendar extends React.Component {
   state = {

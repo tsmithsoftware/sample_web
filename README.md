@@ -1,14 +1,18 @@
-# "Pod Work" Project
+# "Pod Work POC" Project
 
 ## Overview
-This project will [create a basic React calendar](https://medium.com/@moodydev/create-a-custom-calendar-in-react-3df1bfd0b728) and [use webpack to bundle it into a C# .NET application](https://dev.to/milenamonteiro/how-to-easily-load-react-apps-into-an-aspnet-project-using-webpack-728).
-
-This project displays a React calendar talking to an API with a UI test set up.
+This project will create a basic Flutter web application that pulls data from an API / DB backend and displays it in a browser.
 
 ### Techology
-* React
-* Webpack
+* NodeJS
+* Docker
+* PostgreSQL
+* Flutter
 
+### Diagram
+![diagram](./readme_resources/project_outline.drawio.png)
+
+#### DB
 The database can be spun up and associated Liquibase changelogs applied by using:
 
 `cd ./database`
@@ -16,6 +20,7 @@ The database can be spun up and associated Liquibase changelogs applied by using
 
 The Liquibase container exits after applying the changelogs.
 
+#### API
 API runs on localhost:4002 using 
 
 `cd ./api`
@@ -23,17 +28,23 @@ API runs on localhost:4002 using
 This runs the server on port 4002, check using curl or Postman:
 `curl localhost:4002`
 
+### PGAdmin
 The PGAdmin container allows inspection of the database by navigating to localhost:8090. The database can be connected to using the docker network gateway address, which can be found using `docker network inspect bridge`, and the username and password specified in the docker-compose setup.
 
+#### .NET
 Dotnet-calendar project runs on localhost:3000 (which will use the React project) using 
 
 `cd ./dotnet-calendar`
 `npm start`
 
+#### React
 The React calendar project has been moved to the dotnet-calendar project, and can be run on localhost:3005 using:
 
 `cd ./dotnet-calentdar/ClientApp`
 `npm start`
+
+#### UI Testing
+As the web UI is currently built using Flutter Web, the Cypress tool cannot be used for UI testing (https://stackoverflow.com/questions/58679661/testing-flutter-apps-with-cypress).
 
 UI testing framework runs using:
 
@@ -41,11 +52,7 @@ UI testing framework runs using:
 `npx cypress run` to run headless or
 `npx cypress open` to open the Cypress console
 
-The dotnet calendar draws data from the database set up un the ./database folder as a docker-compose project. You can run the database on localhost port 5432 using:
+The dotnet calendar draws data from the database set up under the ./database folder as a docker-compose project, as mentioned before.
 
-`cd ./database`
-`docker-compose up`
-
-and then torn down via
-
-`docker-compose down`
+#### Auth
+Keycloak is used as an authentication/SSO solution as a stand-in for any OAuth / OIDC systems used.

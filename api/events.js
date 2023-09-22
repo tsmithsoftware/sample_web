@@ -38,7 +38,9 @@ async function getEvents() {
     attributes: ["id", "eventName", "startTime", "endTime"]
   })
   .then((result) => {
-    return JSON.stringify(result)
+    return {
+      "events": JSON.stringify(result)
+    }
   })
   .catch((error) => {
       console.log(error);

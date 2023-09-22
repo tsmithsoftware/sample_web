@@ -1,0 +1,43 @@
+version: '2'
+
+volumes:
+  postgres_data:
+      driver: local
+
+services:
+  postgres:
+    container_name: postgres
+    image: 'postgres'
+    environment:
+      POSTGRES_PASSWORD: password
+    ports:
+      - "6000:5432"
+    networks:
+      - auth-network
+
+  keycloak:
+    container_name: keycloak
+    image: keycloak/keycloak
+    ports: 
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      DB_VENDOR: "POSTGRES"
+      DB_ADDR: postgres
+      DB_PORT: 6000
+      DB_USER: keycloak
+      DB_PASSWORD: password
+      KEYCLOAK_USER: user
+      KEYCLOAK_PASSWORD: password
+      KEYCLOAK_FRONTEND_URL: http://localhost:8080/auth
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD:  pass
+    restart: always
+    command: "start-dev"
+    networks:
+      - auth-network
+
+networks:
+  auth-network:
+    driver: bridge

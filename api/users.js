@@ -40,7 +40,9 @@ async function getUsers() {
   },
   )
   .then((result) => {
-    return JSON.stringify(result)
+    return {
+      "users": JSON.stringify(result)
+    }
   })
   .catch((error) => {
       console.log(error);

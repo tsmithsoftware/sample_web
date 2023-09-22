@@ -1,4 +1,4 @@
-version: '3'
+version: '3.9'
 
 services:
 
@@ -49,3 +49,11 @@ services:
       database:
         condition: service_healthy
 
+  frontend:
+    container_name: frontend
+    ports: 
+      - 5000:5000
+    build: ./flutter_calendar/.
+    depends_on:
+      - api
+      - database
