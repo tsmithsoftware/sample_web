@@ -1,5 +1,5 @@
-import 'package:flutter_calendar/core/features/get_events/data/models/event_model.dart';
-import 'package:flutter_calendar/core/features/get_events/domain/entities/event_list_entity.dart';
+import 'package:flutter_calendar/features/get_events/data/models/event_model.dart';
+import 'package:flutter_calendar/features/get_events/domain/entities/event_list_entity.dart';
 
 class EventListModel extends EventListEntity {
   const EventListModel({required List<EventModel> events})

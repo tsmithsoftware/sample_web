@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_calendar/core/features/get_events/domain/entities/schedule_entity.dart';
-import 'package:flutter_calendar/core/features/get_events/domain/repositories/schedule_repository.dart';
-import 'package:flutter_calendar/core/features/get_events/domain/usecases/get_schedule_use_case.dart';
+import 'package:flutter_calendar/features/get_events/domain/entities/schedule_entity.dart';
+import 'package:flutter_calendar/features/get_events/domain/repositories/schedule_repository.dart';
+import 'package:flutter_calendar/features/get_events/domain/usecases/get_schedule_use_case.dart';
 import 'package:flutter_calendar/core/usecases/usecase.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';

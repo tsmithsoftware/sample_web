@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_calendar/core/features/get_events/domain/entities/event_entity.dart';
+import 'package:flutter_calendar/features/get_events/domain/entities/event_entity.dart';
 
 DateTime get _now => DateTime.now();
 

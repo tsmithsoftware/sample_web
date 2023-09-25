@@ -1,4 +1,4 @@
-import 'package:flutter_calendar/core/features/get_events/domain/entities/user_entity.dart';
+import 'package:flutter_calendar/features/get_events/domain/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
   const UserModel({id, firstName, lastName}) : super(id, firstName, lastName);
@@ -6,8 +6,8 @@ class UserModel extends UserEntity {
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
         id: json['id'],
-        firstName: json['firstName'],
-        lastName: json["lastName"]);
+        firstName: json['firstname'],
+        lastName: json["lastname"]);
   }
 
   Map<String, dynamic> toJson() {

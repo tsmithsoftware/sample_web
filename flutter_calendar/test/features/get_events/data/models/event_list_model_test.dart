@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:flutter_calendar/core/features/get_events/data/models/event_list_model.dart';
-import 'package:flutter_calendar/core/features/get_events/data/models/event_model.dart';
-import 'package:flutter_calendar/core/features/get_events/domain/entities/event_list_entity.dart';
+import 'package:flutter_calendar/features/get_events/data/models/event_list_model.dart';
+import 'package:flutter_calendar/features/get_events/data/models/event_model.dart';
+import 'package:flutter_calendar/features/get_events/domain/entities/event_list_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
@@ -28,8 +28,7 @@ void main() {
       'should return a valid model',
       () async {
         // arrange
-        final Map<String, dynamic> jsonMap =
-            json.decode(fixture('event_list_model.json'));
+        final List jsonMap = json.decode(fixture('event_list_model.json'));
         // act
         final result = EventListModel.fromJson(jsonMap);
         // assert

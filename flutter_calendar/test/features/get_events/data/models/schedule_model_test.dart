@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:flutter_calendar/core/features/get_events/data/models/event_list_model.dart';
-import 'package:flutter_calendar/core/features/get_events/data/models/event_model.dart';
-import 'package:flutter_calendar/core/features/get_events/data/models/schedule_model.dart';
-import 'package:flutter_calendar/core/features/get_events/data/models/user_model.dart';
-import 'package:flutter_calendar/core/features/get_events/domain/entities/schedule_entity.dart';
+import 'package:flutter_calendar/features/get_events/data/models/event_list_model.dart';
+import 'package:flutter_calendar/features/get_events/data/models/event_model.dart';
+import 'package:flutter_calendar/features/get_events/data/models/schedule_model.dart';
+import 'package:flutter_calendar/features/get_events/data/models/user_model.dart';
+import 'package:flutter_calendar/features/get_events/domain/entities/schedule_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../fixtures/fixture_reader.dart';

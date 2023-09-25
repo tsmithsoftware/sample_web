@@ -7,13 +7,13 @@ import 'dart:async' as _i6;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:flutter_calendar/core/error/failures.dart' as _i7;
-import 'package:flutter_calendar/core/features/get_events/domain/entities/event_list_entity.dart'
+import 'package:flutter_calendar/features/get_events/domain/entities/event_list_entity.dart'
     as _i4;
-import 'package:flutter_calendar/core/features/get_events/domain/entities/schedule_entity.dart'
+import 'package:flutter_calendar/features/get_events/domain/entities/schedule_entity.dart'
     as _i8;
-import 'package:flutter_calendar/core/features/get_events/domain/entities/user_entity.dart'
+import 'package:flutter_calendar/features/get_events/domain/entities/user_entity.dart'
     as _i3;
-import 'package:flutter_calendar/core/features/get_events/domain/repositories/schedule_repository.dart'
+import 'package:flutter_calendar/features/get_events/domain/repositories/schedule_repository.dart'
     as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 

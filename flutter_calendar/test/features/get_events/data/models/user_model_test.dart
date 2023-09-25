@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:flutter_calendar/core/features/get_events/data/models/user_model.dart';
-import 'package:flutter_calendar/core/features/get_events/domain/entities/user_entity.dart';
+import 'package:flutter_calendar/features/get_events/data/models/user_model.dart';
+import 'package:flutter_calendar/features/get_events/domain/entities/user_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
@@ -14,7 +14,7 @@ void main() {
   });
 
   group('fromJson', () {
-    test('toJson returns valid JSON', () async {
+    test('formJson returns valid model', () async {
       final Map<String, dynamic> jsonMap = json.decode(fixture('user.json'));
       // act
       final result = UserModel.fromJson(jsonMap);
@@ -32,8 +32,8 @@ void main() {
         // assert
         final expectedJsonMap = {
           "id": 1,
-          "firstname": "tom",
-          "lastname": "jones"
+          "firstName": "tom",
+          "lastName": "jones"
         };
         expect(result, expectedJsonMap);
       },

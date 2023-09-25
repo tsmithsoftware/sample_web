@@ -1,4 +1,4 @@
-import 'package:flutter_calendar/core/features/get_events/domain/entities/event_entity.dart';
+import 'package:flutter_calendar/features/get_events/domain/entities/event_entity.dart';
 
 class EventModel extends EventEntity {
   const EventModel(id, eventName, startTime, endTime)
