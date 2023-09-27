@@ -15,7 +15,7 @@ This requires a use to be created inside the KC admin console:
 
 ![](./readme_resources/kc_user.png)
 
-Logging in as this user redirects to the `redirect_uri` with an authorisation code appended:
+Logging in as this user redirects to the `redirect_uri` with an authorisation code appended (in the `&code=` parameter):
 
 `
 http://localhost:8080/?session_state=fb64859b-9267-45a9-9b86-fc10e5b4c19c&code=6274f417-835a-43d2-9d82-76c7e345100a.fb64859b-9267-45a9-9b86-fc10e5b4c19c.a610c27a-fe87-4a52-8eef-fc6cb2b269c0

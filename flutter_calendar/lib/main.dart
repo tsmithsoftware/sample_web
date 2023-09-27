@@ -3,14 +3,18 @@ import 'dart:ui';
 import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar/features/get_events/domain/entities/event_entity.dart';
+import 'package:flutter_calendar/features/login/presentation/login.dart';
 
 DateTime get _now => DateTime.now();
 
 void main() {
-  runApp(MyApp());
+  //runApp(const MyApp());
+  runApp(const Login());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -63,14 +67,14 @@ List<CalendarEventData<EventEntity>> _events = [
   CalendarEventData(
     date: _now.add(const Duration(days: 3)),
     startTime: DateTime(
-        _now.add(Duration(days: 3)).year,
+        _now.add(const Duration(days: 3)).year,
         _now.add(const Duration(days: 3)).month,
-        _now.add(Duration(days: 3)).day,
+        _now.add(const Duration(days: 3)).day,
         10),
     endTime: DateTime(
-        _now.add(Duration(days: 3)).year,
+        _now.add(const Duration(days: 3)).year,
         _now.add(const Duration(days: 3)).month,
-        _now.add(Duration(days: 3)).day,
+        _now.add(const Duration(days: 3)).day,
         14),
     event: EventEntity(1, "Sprint meeting",
         DateTime.parse("2023-02-27 13:27:00,123456789z"), DateTime.now()),

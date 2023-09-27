@@ -1,7 +1,7 @@
-# "Pod Work POC" Project
+# "POC" Project
 
 ## Overview
-This project will create a basic Flutter web application that pulls data from an API / DB backend and displays it in a browser.
+This project will create a basic Flutter web application that pulls data from an API / DB backend and displays it in a browser, secured via Keycloak and UI tested via Selenium, with DB change management handled via Liquibase.
 
 ### Techology
 * NodeJS
@@ -11,6 +11,11 @@ This project will create a basic Flutter web application that pulls data from an
 
 ### Diagram
 ![diagram](./readme_resources/project_outline.drawio.png)
+
+### Current Status
+Keycloak and associated DB set up, DB set up with pgadmin and Liquibase changesets, API set up using Serverless.
+
+To do: Flutter web api, Selenium UI testing.
 
 #### DB
 The database can be spun up and associated Liquibase changelogs applied by using:

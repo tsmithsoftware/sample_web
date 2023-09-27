@@ -81,6 +81,7 @@ void main() {
         'should return server failure when the call to remote data source is unsuccessful',
         () async {
           // arrange
+          reset(mockRemoteDataSource);
           when(mockRemoteDataSource.getSchedule(tNumber))
               .thenThrow(ServerException());
           // act

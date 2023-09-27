@@ -1,0 +1,7 @@
+./flutter_calendar/windows/flutter/
+flutter_calendar/.dart_tool/
+flutter_calendar/.idea/
+flutter_calendar/build/
+flutter_calendar/.flutter-plugins/
+flutter_calendar/.flutter-plugins-dependencies/
+flutter_calendar/flutter_calendar.iml

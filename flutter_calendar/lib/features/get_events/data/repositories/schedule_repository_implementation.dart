@@ -19,7 +19,7 @@ class ScheduleRepositoryImplementation implements ScheduleRepository {
 
   @override
   Future<Either<Failure, ScheduleEntity>> getSchedule(int id) async {
-    if (await networkInfo.isConnected) {
+    if (await networkInfo.isConnected == true) {
       try {
         final remoteSchedule = await remoteDataSource.getSchedule(id);
         await localDataSource.cacheSchedule(remoteSchedule);

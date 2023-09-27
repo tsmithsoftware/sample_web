@@ -1,0 +1,119 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:3444279045135854271",
+      "lastPropertyId": "5:8180995154595924110",
+      "name": "Event",
+      "properties": [
+        {
+          "id": "1:1138275365069752532",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7767134145342430362",
+          "name": "eventName",
+          "type": 9
+        },
+        {
+          "id": "3:764704637277741350",
+          "name": "startTime",
+          "type": 10
+        },
+        {
+          "id": "4:3023858497766004201",
+          "name": "endTime",
+          "type": 10
+        },
+        {
+          "id": "5:8180995154595924110",
+          "name": "scheduleId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "1:7862374044274807120",
+          "relationTarget": "Schedule"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:8116205206453749373",
+      "lastPropertyId": "3:1846407899909715114",
+      "name": "Schedule",
+      "properties": [
+        {
+          "id": "1:7195503826473016426",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:6117062866313578171",
+          "name": "scheduleName",
+          "type": 9
+        },
+        {
+          "id": "3:1846407899909715114",
+          "name": "userId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "2:522414821457522289",
+          "relationTarget": "User"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:8703410929131812054",
+      "lastPropertyId": "5:5383349535016798877",
+      "name": "User",
+      "properties": [
+        {
+          "id": "1:7094871743222610124",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:5279589115123962339",
+          "name": "firstName",
+          "type": 9
+        },
+        {
+          "id": "3:1171242639859731954",
+          "name": "lastName",
+          "type": 9
+        },
+        {
+          "id": "4:2063345168859440761",
+          "name": "date",
+          "type": 10
+        },
+        {
+          "id": "5:5383349535016798877",
+          "name": "scheduleId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "3:1114094041866011809",
+          "relationTarget": "Schedule"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "3:8703410929131812054",
+  "lastIndexId": "3:1114094041866011809",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}
