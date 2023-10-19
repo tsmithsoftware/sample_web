@@ -53,7 +53,7 @@ services:
     container_name: frontend
     ports: 
       - 5000:5000
-    build: ./flutter_calendar/.
+    build: ./dotnet-calendar/.
     depends_on:
       - api
       - database
