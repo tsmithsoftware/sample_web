@@ -42,6 +42,10 @@ Dotnet-calendar project runs on localhost:3000 (which will use the React project
 `cd ./dotnet-calendar`
 `npm start`
 
+The certificates for the Docker container were generated using the process outlined at https://stackoverflow.com/questions/60724704/asp-net-core-application-in-docker-over-https.
+
+Please keep in mind that **copying the certificates into the Docker container is an anti-pattern and is HIGHLY discouraged.** In this case, because the solution is a development application that will not be deployed, we don't care so much about certificate security.
+
 #### React
 The React calendar project has been moved to the dotnet-calendar project, and can be run on localhost:3005 using:
 
