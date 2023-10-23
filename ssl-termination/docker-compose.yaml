@@ -1,0 +1,27 @@
+version: '2'
+# https://github.com/nginx-proxy/nginx-proxy
+# looking to proxy https with a self-gen cert through to internal http(s) app
+services:
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./ssl_certs:/etc/nginx/certs
+
+  whoami:
+    image: jwilder/whoami
+    expose:
+      - "8000"
+    environment:
+      - VIRTUAL_HOST=whoami.example
+      - VIRTUAL_PORT=8000
+
+  dotnet:
+    build: ./dotnet-app/.
+    expose:
+      - "80"
+    environment:
+      - VIRTUAL_HOST=dotnet.example
