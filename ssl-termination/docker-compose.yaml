@@ -3,13 +3,13 @@ version: '2'
 # looking to proxy https with a self-gen cert through to internal http(s) app
 services:
   nginx-proxy:
-    image: nginxproxy/nginx-proxy
+    image: nginxproxy/nginx-proxy:1.3.0
     ports:
       - "80:80"
       - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ./ssl_certs:/etc/nginx/certs
+      - ./nginx/ssl_certs:/etc/nginx/certs
 
   whoami:
     image: jwilder/whoami

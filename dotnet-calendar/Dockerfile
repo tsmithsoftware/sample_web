@@ -3,6 +3,7 @@ WORKDIR /App
 
 # Set up HTTPS
 RUN update-ca-certificates
+RUN dotnet dev-certs https --trust
 
 # install node
 RUN apt-get update && apt-get install -y \
@@ -18,8 +19,11 @@ RUN dotnet restore
 # Build and publish a release
 RUN dotnet publish -c Release -o out
 
+EXPOSE 443
+
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /App
 COPY --from=build-env /App/out .
 ENTRYPOINT ["dotnet", "dotnet-calendar.dll"]
+

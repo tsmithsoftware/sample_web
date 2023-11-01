@@ -13,6 +13,12 @@ this project requires three pre-requisites:
 to ensure localhost redirection works correctly:
 ![Alt text](./https_example.png "a title")
 
+`
+If HTTPS is enabled for a virtual host but its certificate is missing, nginx-proxy will configure nginx to use the default certificate (default.crt with default.key) and return a 500 error.
+`
+
+Certificates should be provided using the schema in the docs.
+
 With regards to `3`, nginx configuration defaults to the following:
 
 ![a](./readme_resources/nginx_default_conf.png)
@@ -22,3 +28,7 @@ This default configuration will return a 500 error if a HTTPS connection is atte
 Once this HTTPS check is commented out or removed, localhost redirect works correctly.
 
 ![](./readme_resources/webapp_ssl.png)
+
+### NEXT STEPS
+adding ssl for upstream servers
+https://docs.nginx.com/nginx/admin-guide/security-controls/securing-http-traffic-upstream/
