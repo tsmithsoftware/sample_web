@@ -103,9 +103,11 @@ services:
     networks:
       - auth-network
 
+# build our own image to allow using KC as a reverse proxy, https://www.keycloak.org/server/reverseproxy
   keycloak:
     container_name: keycloak
-    image: keycloak/keycloak
+    build: ./keycloak/.
+    #image: keycloak/keycloak
     ports: 
       - "8080:8080"
     depends_on:
@@ -118,13 +120,15 @@ services:
       DB_PASSWORD: password
       KEYCLOAK_USER: user
       KEYCLOAK_PASSWORD: password
-      KEYCLOAK_FRONTEND_URL: https://keycloak.example/auth
+      KEYCLOAK_FRONTEND_URL: https://keycloak.example
       KEYCLOAK_ADMIN: admin
+      KC_HOSTNAME: keycloak.example
+      PROXY_ADDRESS_FORWARDING: true
       KEYCLOAK_ADMIN_PASSWORD: pass
       VIRTUAL_HOST: keycloak.example
       VIRTUAL_PORT: 8080
     restart: always
-    command: "start-dev"
+    command: "start-dev --proxy edge --hostname-strict=false" # this allows use of X-Forwarded-*
     networks:
       - auth-network
 
