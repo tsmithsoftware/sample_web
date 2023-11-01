@@ -1,32 +1,23 @@
-using System.Security.Claims;
-using Keycloak.AuthServices.Authentication;
-
 var builder = WebApplication.CreateBuilder(args);
-var services = builder.Services;
-var configuration = builder.Configuration;
-var host = builder.Host;
 
-services.AddKeycloakAuthentication(configuration);
-services.AddControllersWithViews();
+// Add services to the container.
+
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-//if (!app.Environment.IsDevelopment())
-//{
+if ( ! app.Environment.IsDevelopment() )
+{
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-//    app.UseHsts();
-//}
+    app.UseHsts();
+}
 
-//app.UseHttpsRedirection();
+Console.WriteLine("Environment is: " + app.Environment.EnvironmentName);
+app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-app.UseAuthentication();
-app.UseAuthorization();
 
-app.MapGet("/", (ClaimsPrincipal user) => {
-    app.Logger.LogInformation(user?.Identity?.Name);
-}).RequireAuthorization();
 
 app.MapControllerRoute(
     name: "default",

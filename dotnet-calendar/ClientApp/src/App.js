@@ -1,32 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import keycloaklogo from './keycloak.png';
-import love from './heart.png';
+import React, { Component } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import AppRoutes from './AppRoutes';
+import { Layout } from './components/Layout';
+import './custom.css';
 
-import './App.css';
+export default class App extends Component {
+  static displayName = App.name;
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-      <h1>Welcome to your Secure React App with Keycloak</h1>
-      <div>
-        <img src={logo} className="App-logo" alt="logo" />
-        <img src={love} className="Love-logo" alt="heart" />
-        <img src={keycloaklogo} className="Keycloak-logo" alt="keycloaklogo" />
-        </div>
-       
-        <a
-          className="App-link"
-          href="https://medium.com/keycloak"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Keycloak
-        </a>
-      </header>
-    </div>
-  );
+  render() {
+    return (
+      <Layout>
+        <Routes>
+          {AppRoutes.map((route, index) => {
+            const { element, ...rest } = route;
+            return <Route key={index} {...rest} element={element} />;
+          })}
+        </Routes>
+      </Layout>
+    );
+  }
 }
-
-export default App;
