@@ -7,6 +7,9 @@ This project will create a basic Flutter web application that pulls data from an
 * NodeJS
 * Docker
 * PostgreSQL
+* Liquibase
+* Keycloak
+* .NET Core
 
 ### Diagram
 ![diagram](./readme_resources/project_outline.drawio.png)
@@ -48,8 +51,11 @@ The React calendar project has been moved to the dotnet-calendar project, and ca
 `cd ./dotnet-calentdar/ClientApp`
 `npm start`
 
-##### NGINX
+#### NGINX
 The docker-compose project has NGINX set up as a reverse proxy for SSL termination and DNS resolution (of a type - the resolution uses the local hosts file, please see "Host file updates" for details.)
+
+#### Hosts file updates
+The [hosts file](https://en.wikipedia.org/wiki/Hosts_(file)) is a plain text operating system file that maps hostnames to IP addresses. It acts as a local [DNS](https://en.wikipedia.org/wiki/Domain_Name_System). The docker-compose setup uses the VIRTUAL_HOST environment variable inside the containers to work with the [nginx-proxy](https://github.com/nginx-proxy/nginx-proxy) Docker image, which requires the users' DNS to be set up to forward requests to the particular host running nginx-proxy. Updating the hosts file is a quick, localised and easy method of doing this.
 
 #### UI Testing
 UI testing framework runs using:
