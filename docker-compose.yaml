@@ -16,6 +16,8 @@ services:
       timeout: 60s
       retries: 5
       start_period: 80s 
+    networks:
+      - auth-network
 
   liquibase:
     image: liquibase/liquibase:4.23
@@ -26,6 +28,8 @@ services:
     volumes:
       - ./database/sql/liquibase/changelog/:/liquibase/changelog
     command: update --changelog-file=changelog-1.sql --url=jdbc:postgresql://database:5432/postgres --username=username --password=password
+    networks:
+      - auth-network
 
   pgadmin:
     container_name: pgadmin4_container
@@ -34,32 +38,63 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: root
+      VIRTUAL_HOST: pgadmin.example
     ports:
-      - "8090:80"
+      - "8070:80"
     depends_on:
       database:
         condition: service_healthy 
+    networks:
+      - auth-network
 
-  api:
-    container_name: api
+#  api:
+#    container_name: api
+#    ports:
+#      - 4002:4002
+#    build: ./api/.
+#    depends_on:
+#      database:
+#        condition: service_healthy
+
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy:1.3.0
     ports:
-      - 4002:4002
-    build: ./api/.
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./nginx/ssl_certs:/etc/nginx/certs
+      # - ./nginx/config:/etc/nginx/conf.d
+    networks:
+      - auth-network
+    depends_on:
+      - dotnet   
+
+  dotnet:
+    container_name: api
+    build: ./dotnet-calendar/.
+    ports:
+      - "8090:80"
+      - "8030:443"
+    environment:
+      - VIRTUAL_HOST=dotnet.example
+      - VIRTUAL_PROTO=https
+      - VIRTUAL_PORT=443
+      - ASPNETCORE_HTTPS_PORT=443
+      - ASPNETCORE_URLS=https://*:+;http://*:+;
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https_certs/aspnetapp.pfx 
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=mypass123
+    volumes:
+      - "./dotnet-calendar/certs:/https_certs/"
     depends_on:
       database:
-        condition: service_healthy
+        condition: service_healthy    
+    networks:
+      - auth-network  
 
-  frontend:
-    container_name: frontend
-    ports: 
-      - 5000:5000
-    build: ./dotnet-calendar/.
-    depends_on:
-      - api
-      - database
-
-  postgres:
-    container_name: postgres
+  keycloak_database:
+    container_name: keycloak_database
     image: 'postgres'
     environment:
       POSTGRES_PASSWORD: password
@@ -68,26 +103,31 @@ services:
     networks:
       - auth-network
 
+# build our own image to allow using KC as a reverse proxy, https://www.keycloak.org/server/reverseproxy
   keycloak:
     container_name: keycloak
     image: keycloak/keycloak
     ports: 
       - "8080:8080"
     depends_on:
-      - postgres
+      - keycloak_database
     environment:
       DB_VENDOR: "POSTGRES"
-      DB_ADDR: postgres
+      DB_ADDR: keycloak_database
       DB_PORT: 6000
       DB_USER: keycloak
       DB_PASSWORD: password
       KEYCLOAK_USER: user
       KEYCLOAK_PASSWORD: password
-      KEYCLOAK_FRONTEND_URL: http://localhost:8080/auth
+      KEYCLOAK_FRONTEND_URL: https://keycloak.example
       KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD:  pass
+      KC_HOSTNAME: keycloak.example
+      PROXY_ADDRESS_FORWARDING: true
+      KEYCLOAK_ADMIN_PASSWORD: pass
+      VIRTUAL_HOST: keycloak.example
+      VIRTUAL_PORT: 8080
     restart: always
-    command: "start-dev"
+    command: "start-dev --proxy edge --hostname-strict=false" # this allows use of X-Forwarded-*
     networks:
       - auth-network
 
